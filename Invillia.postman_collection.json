@@ -1,0 +1,373 @@
+{
+	"info": {
+		"_postman_id": "7cefa2ca-9a56-43ad-bdaa-1bd1acf0789d",
+		"name": "Invillia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getAllStores",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/acme-store/stores",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"acme-store",
+						"stores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createStore",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ff8325a5-1645-475d-b491-48e7436d5298",
+						"exec": [
+							"pm.environment.set(\"last_created_store_id\", pm.response.json().id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"teste\",\n    \"address\": \"teste\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/acme-store/stores",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"acme-store",
+						"stores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateStore",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": \"{{last_created_store_id}}\",\n    \"name\": \"Invillia\",\n    \"address\": \"Rua Padre Duarte, 151, Jardim Nova América – Araraquara - SP\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/acme-store/stores",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"acme-store",
+						"stores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getStoreById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/acme-store/stores/{{last_created_store_id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"acme-store",
+						"stores",
+						"{{last_created_store_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchStoresByParams",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/acme-store/stores/search?name=inv&address=araraquara",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"acme-store",
+						"stores",
+						"search"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "inv"
+						},
+						{
+							"key": "address",
+							"value": "araraquara"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllOrders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/acme-store/orders",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"acme-store",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createOrder",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9a7129ea-88a4-496f-8b52-d644cea4ad74",
+						"exec": [
+							"pm.environment.set(\"last_created_order_id\", pm.response.json().id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"address\": \"invillia\",\n    \"store\":{\n    \t\"id\": \"{{last_created_store_id}}\"\n    },\n    \"orderItens\":[{\n    \t\"description\": \"Rocket-Powered Roller Skates\",\n    \t\"unitPrice\": \"1200\",\n    \t\"quantity\": \"1\"\n    },\n    {\n    \t\"description\": \"Giant Mouse Trap\",\n    \t\"unitPrice\": \"500\",\n    \t\"quantity\": \"2\"\n    }]\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/acme-store/orders",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"acme-store",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getOrderById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/acme-store/orders/{{last_created_order_id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"acme-store",
+						"orders",
+						"{{last_created_order_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getOrderItensByOrder",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/acme-store/orders/{{last_created_order_id}}/itens",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"acme-store",
+						"orders",
+						"{{last_created_order_id}}",
+						"itens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchOrdersByParam",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/acme-store/orders/search?address=invillia&status=CREATED",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"acme-store",
+						"orders",
+						"search"
+					],
+					"query": [
+						{
+							"key": "address",
+							"value": "invillia"
+						},
+						{
+							"key": "status",
+							"value": "CREATED"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createPayment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/acme-store/orders/{{last_created_order_id}}/payment?creditCardNumber=1234567890123456",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"acme-store",
+						"orders",
+						"{{last_created_order_id}}",
+						"payment"
+					],
+					"query": [
+						{
+							"key": "creditCardNumber",
+							"value": "1234567890123456"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "refundPayment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/acme-store/orders/{{last_created_order_id}}/refund",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"acme-store",
+						"orders",
+						"{{last_created_order_id}}",
+						"refund"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
